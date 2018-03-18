@@ -7,4 +7,18 @@ from prey import Prey
 
 
 class Ball(Prey):
-    pass
+    radius = 5
+
+    def __init__(self, x, y, angle, speed):
+        Prey.__init__(self, x, y, 0, 0, angle, speed)
+        self.randomize_angle()
+
+
+    def update(self):
+        self.move()
+
+
+    def display(self, canvas):
+        canvas.create_oval(self._x-Ball.radius, self._y-Ball.radius,
+                           self._x+Ball.radius, self._y+Ball.radius,
+                           fill='#00f')
