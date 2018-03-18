@@ -9,6 +9,7 @@ from hunter    import Hunter
 
 
 # Global variables: declare them global in functions that assign to them: e.g., ... = or +=
+simultons = set()
 
 
 #return a 2-tuple of the width and height of the canvas (defined in the controller)
@@ -50,12 +51,12 @@ def mouse_click(x,y):
 
 #add simulton s to the simulation
 def add(s):
-    pass
+    simultons.add(s)
 
 
 # remove simulton s from the simulation
 def remove(s):
-    pass
+    simultons.remove(s)
 
 
 #find/return a set of simultons that each satisfy predicate p
@@ -65,11 +66,16 @@ def find(p):
 
 #call update for every simulton in the simulation
 def update_all():
-    pass
+    for s in simultons:
+        s.update()
 
 
 #delete every simulton being simulated from the canvas; then call display for every
 #  simulton being simulated to add it back to the canvas, possibly in a new location, to
 #  animate it; also, update the progress label defined in the controller
 def display_all():
-    pass
+    for o in controller.the_canvas.find_all():
+        controller.the_canvas.delete(o)
+
+    for s in simultons:
+        s.display(controller.the_canvas)
